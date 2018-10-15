@@ -84,8 +84,6 @@ class Feature_selection:
 		sm = SMOTE(random_state=42)
 		X_train = np.asarray(X_train, dtype=float)
 		y_train = np.asarray(y_train, dtype=int)
-		print('type :', type(X_train))
-		print(X_train)
 		X_train_bal, y_train_bal = sm.fit_sample(X_train, y_train)
 		return X_train_bal, y_train_bal
 		
@@ -99,12 +97,12 @@ class Feature_selection:
 	def get_data(self):
 		'''Numpy array containing the data
 		'''
-		return self.DATA
+		return np.asarray(self.DATA, dtype=float)
 
 	def get_label(self):
 		'''Numpy array containing the label
 		'''
-		return self.LABEL
+		return np.asarray(self.LABEL, dtype=int)
 
 if __name__=='__main__':
 
