@@ -44,7 +44,6 @@ class Feature_selection:
 		else:
 			return False			
 
-
 	def _open_read_file(self):
 		'''Open and read csv files.
 			The spamreader will be used to read the rows of
@@ -54,29 +53,6 @@ class Feature_selection:
 		self.SPAMREADER = csv.reader(self.FILE)
 		self.FRAUD_FEATURES = next(self.SPAMREADER) 
 	
-	"""
-	def _balance_class_brute(self):
-		'''Take the same number of element in each class
-		'''
-		class_index = self.FRAUD_FEATURES.index('Class')		
-		nb_classID_0 = 0
-		nb_classID_1 = 0
-		nb_ignored = 0
-		for row in self.SPAMREADER:
-			if row[class_index] == '0' and nb_classID_0 < self.NB_CLASSID_FRAUD:
-				self._split_data_labels(row, class_index)	
-				nb_classID_0 += 1
-			elif row[class_index] == '1' and nb_classID_1 < self.NB_CLASSID_FRAUD:
-				self._split_data_labels(row, class_index)	
-				nb_classID_1 += 1
-			else:
-				nb_ignored += 1
-	
-		print('Number sample class id 0 :', nb_classID_0)
-		print('Number sample  class id 1 :', nb_classID_1)
-		print('Number of not used samlpes :', nb_ignored)		
-	"""
-
 	def _split_data_labels(self):
 		'''Split the data and associated labels into
 			two differents arrays
@@ -106,30 +82,15 @@ class Feature_selection:
 			return Y_train_bal : balanced array of classes
 		'''
 		sm = SMOTE(random_state=42)
+		X_train = np.asarray(X_train, dtype=float)
+		y_train = np.asarray(y_train, dtype=int)
+		print('type :', type(X_train))
+		print(X_train)
 		X_train_bal, y_train_bal = sm.fit_sample(X_train, y_train)
 		return X_train_bal, y_train_bal
 		
 			
-	def count_class_sample(self):
-		'''Count the number of items per class
-		'''
-		class_index = self.FRAUD_FEATURES.index('Class')
-		
-		classID_0 = 0
-		classID_1 = 0
-		default = 0
-		for row in self.SPAMREADER:
-			if row[class_index] == '0':
-				classID_0 += 1
-			elif row[class_index] == '1': 
-				classID_1 += 1
-			else:
-				 default += 1
-		print('Total number of class 0 :', classID_0)
-		print('Total number of class 1 :', classID_1)
-		print('Total number of unknonwn class :', default)
-
-	def count_class_samp(self, labels):
+	def count_class_sample(self, labels):
 		'''Display the number of sample in each class
 		'''
 		labels = np.reshape(np.asarray(labels, dtype=int), len(labels), 1)

@@ -16,10 +16,8 @@ if __name__ == '__main__':
 		
 		X_train, X_test = data[train_index], data[test_index]
 		y_train, y_test = label[train_index], label[test_index]
-		feature_select.count_class_samp(y_train)
 		
 		X_train_bal, y_train_bal = feature_select.balance_class_smote(X_train, y_train)
-		feature_select.count_class_samp(y_train_bal)
 		
 	
 
