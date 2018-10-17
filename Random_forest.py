@@ -30,8 +30,7 @@ class Random_forest:
         y_pred = np.asarray(self.FOREST.predict(self.X_TEST), dtype=int)
         y_pred_proba = np.asarray(self.FOREST.predict_proba(self.X_TEST), dtype=float)
         y_test = np.asarray(self.Y_TEST, dtype=int)
-	
-        print('hello')	
+		
         self.METRICS = Metrics(y_pred, y_test, y_pred_proba)
 
     def display_metrics(self):
@@ -57,11 +56,3 @@ class Random_forest:
         print('AUC (Area under the curve) : ', auc_score)
 
         metrics.plot_roc()
-
-if __name__=='__main__':
-	
-	data_filepath = 'train_data_clean.npy'
-	label_filepath = 'train_label_clean.npy'
-	random_forest = Random_forest(data_filepath, label_filepath)
-	random_forest.rdm_forest_classifier()
-	random_forest.display_metrics()
