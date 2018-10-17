@@ -13,14 +13,13 @@ class Feature_selection:
 
 	EXTENTION = '.csv'
 	
-	NEW_ARRAY = []
 	NEW_DATA_ARRAY = []
 	NEW_LABEL_ARRAY = []
 	
 	def __init__(self, filepath_data, output_data_file=None, output_label_file=None): 
 		self.FILEPATH_DATA = filepath_data
 
-		# If the file has a correct extention,open and read it
+		# If the file has a correct extention, open and read it
 		if self._check_file():
 			self._open_read_file()
 			self._split_data_labels()
@@ -29,12 +28,12 @@ class Feature_selection:
 			# Save data and labels
 			if output_data_file != None:
 				self._array2file(output_data_file,
-									len(self.FRAUD_FEATURES) - 1,
-									self.NEW_DATA_ARRAY)
+							len(self.FRAUD_FEATURES) - 1,
+							self.NEW_DATA_ARRAY)
 			if output_label_file != None:
 				self._array2file(output_label_file,
-									1,
-									self.NEW_LABEL_ARRAY)
+							1,
+							self.NEW_LABEL_ARRAY)
 
 	def _check_file(self):
 		'''Check if the file is a .csv
@@ -66,15 +65,15 @@ class Feature_selection:
 		''' Write an array into a csv file
 		'''
 		np.save(output_file, np.reshape(np.array(array),
-										(-1, nb_parameters)))
+						(-1, nb_parameters)))
 	def _reshape_array(self):
 		''' Reshape the array into : nb_samples*nb_features
 		'''
 		self.DATA = np.reshape(np.array(self.NEW_DATA_ARRAY),
-								(-1, len(self.FRAUD_FEATURES) - 1))
+					(-1, len(self.FRAUD_FEATURES) - 1))
 		
 		self.LABEL = np.reshape(np.array(self.NEW_LABEL_ARRAY),
-								(-1, 1))
+					(-1, 1))
 								
 	def balance_class_smote(self, X_train, y_train):
 		'''Use SMOTE algorithm to balance classes
@@ -103,11 +102,3 @@ class Feature_selection:
 		'''Numpy array containing the label
 		'''
 		return np.asarray(self.LABEL, dtype=int)
-
-if __name__=='__main__':
-
-	filepath_data = 'creditcard.csv'
-	#output_data_file = 'train_data_clean'
-	#output_label_file = 'train_label_clean'
-	param_selec = Feature_selection(filepath_data)
-	param_selec.count_class_samp(param_selec.NEW_LABEL_ARRAY)
