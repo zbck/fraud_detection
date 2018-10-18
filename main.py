@@ -3,7 +3,9 @@ from Feature_selection import Feature_selection
 from Random_forest import Random_forest
 from Metrics import Metrics
 
-# TODO : make mean of the different metrics
+# TODO : strore the different metrics for each loop
+# TODO : Correct warnings
+# TODO : Add logs
 
 if __name__ == '__main__':
    
