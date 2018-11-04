@@ -2,7 +2,7 @@
 Template for an unbalanced binary classification problem.
 
 ## Additional information
-Random forest was the algorithm used for the classification. 
+Random forest was the algorithm used for the classification.
 SMOTE was use to generate exemple of the minority class.
 
 ## Built With
